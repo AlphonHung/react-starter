@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { ITodoItem } from '../../store/todoList/todoListTypes';
-import { todoActions } from '../../store/todoList/todoListActions';
+import { ITodoItem } from '~/store/todoList/todoListTypes';
+import { todoActions } from '~/store/todoList/todoListActions';
 import { RootState } from '../../store/index';
 import '../../assets/scss/components/TodoList.scss';
 

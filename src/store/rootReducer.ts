@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-import todoListReducer from './todoList/todoListReducer';
+import { SystemReducer } from './ducks';
 
-const rootReducer = combineReducers({
-    todoList: todoListReducer,
+export const rootReducer = combineReducers({
+    system: SystemReducer,
 });
 
-export default rootReducer;
+export type RootState = ReturnType<typeof rootReducer>;

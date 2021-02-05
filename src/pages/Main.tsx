@@ -1,5 +1,5 @@
 import React from 'react';
-import '../assets/scss/pages/Main.scss';
+import '~/assets/scss/pages/Main.scss';
 
 interface IMainProps {
     title: String

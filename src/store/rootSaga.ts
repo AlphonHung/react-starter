@@ -1,8 +1,8 @@
-import { all } from 'redux-saga/effects';
-import todoListSaga from './todoList/todoListSaga';
+import { all, fork } from 'redux-saga/effects'
+import { SystemSaga } from './sagas';
 
-export default function* rootSaga() {
-    yield all([
-        todoListSaga()
-    ])
+export function* rootSaga() {
+  yield all([
+    fork(SystemSaga),
+  ]);
 }
