@@ -1,8 +1,8 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import { HashRouter } from 'react-router-dom';
-import configureStore from './store/configureStore';
-import HeaderNavigator from './components/navigator/HeaderNavigator';
+import configureStore from '~/store/configureStore';
+import Header from '~/components/Header';
 import Routes from './routers/routes';
 import '~/assets/scss/App.scss';
 
@@ -12,7 +12,7 @@ const store = configureStore();
 const App = () => (
     <Provider store={store}>
         <HashRouter>
-            <HeaderNavigator />
+            <Header />
             <Routes />
         </HashRouter>
     </Provider>

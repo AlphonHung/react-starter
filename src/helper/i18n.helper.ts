@@ -1,7 +1,7 @@
 import i18next from 'i18next';
 import { StorageHelper } from './storage.helper';
 import { LocaleConfig } from '../config';
-import { Resources, AvailableLocale, LocaleOptions } from '../i18n';
+import { Resources, LocaleOptions } from '../i18n';
 
 export class I18nHelper {
     private static _instance: I18nHelper;
@@ -28,15 +28,17 @@ export class I18nHelper {
 
     /** 取得目前使用的語系選項物件 */
     getCurrentLocaleOption() {
-        return LocaleOptions.find(x => x.resource === i18next.language);
+        const currentLocale = LocaleOptions.find(x => x.resource === i18next.language);
+        if (currentLocale) return currentLocale;
+        else return LocaleOptions[0];
     }
 
     /** 改變語系 */
-    changeLanguage(lang: AvailableLocale) {
-        const storage = StorageHelper.instance.current;
-
+    changeLanguage(lang: string) {
+        if (!LocaleOptions.some(x => x.key === lang)) return;
         i18next.changeLanguage(lang)
-            .then(() => { storage.setItem(StorageHelper.instance.keys.System.Locale, lang); })
-            .catch((error) => { console.log('i18n切換語言失敗', error) });
+            .then(() => { StorageHelper.instance.current.setItem(StorageHelper.instance.keys.System.Locale, lang); })
+            .catch((error) => { console.log('i18n切換語言失敗', error) })
+            .finally(() => { window.location.reload() });
     }
 }

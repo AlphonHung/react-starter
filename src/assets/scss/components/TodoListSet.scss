@@ -3,17 +3,19 @@
 .todo-list-set {
     border: 1px solid $border-common;
     border-radius: 10px;
-    .todo-list {
-        padding: 10px;
-        .todo {
-            font-size: 20px;
-        }
-    }
+    margin: 10px;
+    padding: 10px;
+
     .new-todo-area {
         font-size: 14px;
         @include anim((
             name: example,
             duration: 1s
         ))
+    }
+
+    .todo-list {
+        padding: 10px;
+        list-style: none;
     }
 }

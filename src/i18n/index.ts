@@ -9,8 +9,6 @@ export const Resources = {
 
 /** 語系選單 */
 export const LocaleOptions = [
-    {key: 'zh', value: '中文', resource: 'zh_TW' },
-    {key: 'en', value: 'English', resource: 'en_US' },
-]
-
-export type AvailableLocale = 'zh_TW' | 'en_US';
+    {key: 'zh_TW', value: '中文', resource: 'zh_TW' },
+    {key: 'en_US', value: 'English', resource: 'en_US' },
+];

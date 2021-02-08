@@ -8,7 +8,8 @@ module.exports = {
     },
     output: {
         path: path.resolve(__dirname, './dist/'),
-        filename: 'bundle.js',
+        filename: 'js/[name].[chunkhash].js',
+        chunkFilename: 'js/[name].[chunkhash].js'
     },
     module: {
         rules: [
@@ -56,7 +57,7 @@ module.exports = {
     plugins: [
         // 用來產生dist/index.html
         new HtmlWebpackPlugin({
-            template: `${__dirname}/src/index.html`,
+            template: `${__dirname}/src/assets/index.html`,
             filename: 'index.html',
             inject: 'body', // 把output的js引用到產生的html body內
         })
