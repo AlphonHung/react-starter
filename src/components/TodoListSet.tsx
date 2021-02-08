@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-import { RootState, ITodo, TodoActionCreators } from '~/store';
+import { ITodo } from '~/domain';
+import { RootState, TodoActionCreators } from '~/store';
 import '~/assets/scss/components/TodoListSet.scss';
 
 /** 目前順位第一個任務 */

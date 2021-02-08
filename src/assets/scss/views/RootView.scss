@@ -1,6 +1,6 @@
+@import '../shared.scss';
+
 .home {
     padding: 10px;
-    h1 {
-        color: red
-    }
+    @include anim(( name: example, duration: 1s, iteration-count: infinite, direction: alternate ))
 }

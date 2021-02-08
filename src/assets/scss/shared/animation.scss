@@ -10,9 +10,9 @@
 /** 範例動畫改字體色 */
 @keyframes example {
     from {
-        color: blue;
+        color: rgb(100, 120, 120);
     }
     to {
-        color: yellow;
+        color: rgb(120, 80, 100);
     }
 }

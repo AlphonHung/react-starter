@@ -1,13 +1,8 @@
 import produce from 'immer';
 import moment from 'moment';
+import { ITodo } from '~/domain';
 
 const prefix = 'TODO';
-
-export interface ITodo {
-    id: string;
-    title: string;
-    done: boolean;
-}
 
 export const TodoActionTypes = {
     GET_LIST: `${prefix}/GET_LIST`,
@@ -40,7 +35,6 @@ export interface ToggleTodoAction {
     type: typeof TodoActionTypes.TOGGLE_TODO;
     id: string;
 }
-
 
 type TodoAction
     = GetListAction
