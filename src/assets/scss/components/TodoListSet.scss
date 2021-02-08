@@ -1,0 +1,19 @@
+@import '../shared.scss';
+
+.todo-list-set {
+    border: 1px solid $border-common;
+    border-radius: 10px;
+    .todo-list {
+        padding: 10px;
+        .todo {
+            font-size: 20px;
+        }
+    }
+    .new-todo-area {
+        font-size: 14px;
+        @include anim((
+            name: example,
+            duration: 1s
+        ))
+    }
+}

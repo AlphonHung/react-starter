@@ -5,6 +5,8 @@ export const StorageKeys = {
     },
     System: {
         Locale: 'SYSTEM/LOCALE', // 目前語言
-        MessagingToken: 'SYSTEM/MESSAGING_TOKEN' // FCM推播token
+    },
+    Todo: {
+        List: 'TODO/LIST', // 範例：待辦事項
     }
 }

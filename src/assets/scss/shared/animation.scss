@@ -1,0 +1,18 @@
+// 所有動畫
+
+/** 使用動畫並帶入參數的mixin */
+@mixin anim($anim) {
+    @each $key, $value in $anim {
+        animation-#{$key}: $value;
+    }
+}
+
+/** 範例動畫改字體色 */
+@keyframes example {
+    from {
+        color: blue;
+    }
+    to {
+        color: yellow;
+    }
+}

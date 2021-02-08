@@ -11,6 +11,18 @@ const zh_TW: LocaleType = {
             connecting: "CONNECTING",
             url_unsupported: "連結無效",
         },
+        button: {
+            confirm: "確定",
+            cancel: "取消",
+            reload: "重新整理",
+            add: "新增"
+        }
+    },
+    todo: {
+        message: {
+            current_todo: "目前任務",
+            none_todo: "沒有要做的事"
+        }
     }
 }
 

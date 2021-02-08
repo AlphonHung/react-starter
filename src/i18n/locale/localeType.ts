@@ -12,5 +12,18 @@ export interface LocaleType {
             connecting: string; // 連線中(呼叫api)
             url_unsupported: string; // 連結無效
         };
+        // 泛用按鈕
+        button: {
+            confirm: string;
+            cancel: string;
+            reload: string;
+            add: string;
+        };
+    };
+    todo: {
+        message: {
+            current_todo: string; // 第一順位任務
+            none_todo: string; // 目前無任務
+        }
     }
 }

@@ -1,10 +1,11 @@
 import { takeEvery, put, call, all } from 'redux-saga/effects';
-import { SystemActionTypes, SystemActionCreators, InitAppAction } from '../ducks';
+import { SystemActionTypes, SystemActionCreators, InitAppAction, TodoActionCreators } from '../ducks';
 
 /** App初始化拿取必備資料 */
 function* initApp(action: InitAppAction) {
     yield put(SystemActionCreators.addLoadingFlag(action.type));
-    // get api data or something when app init
+    // 放入App初始化需執行的非同步作業
+    yield put(TodoActionCreators.getList());
     yield put(SystemActionCreators.removeLoadingFlag(action.type));
 }
 
