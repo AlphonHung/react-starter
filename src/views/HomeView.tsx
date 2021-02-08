@@ -1,7 +1,6 @@
 import React from 'react';
 import '~/assets/scss/views/RootView.scss';
 
-/** 主要操作區 */
 const HomeView = () => {
     return (
         <div className="home">
