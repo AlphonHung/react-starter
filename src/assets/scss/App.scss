@@ -1,7 +1,8 @@
-@import "./shared";
+@import "./shared.scss";
+@import "./variable.scss";
 
 body {
     margin: 0;
     padding: 0;
-    background-color: $view-bg;
+    background-color: map-get($colors, view-bg);
 }

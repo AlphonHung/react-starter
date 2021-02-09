@@ -52,7 +52,7 @@ const Todo = (props: { todo: ITodo }) => {
         <div className="todo">
             <div className="todo-title">{`Title:${todo.title}`}</div>
             <div className="todo-id">{`ID:${todo.id}`}</div>
-            <img className="todo-check" onClick={() => { dispatch(TodoActionCreators.toggleTodo(todo.id)); }} src={todo.done ? imgSource.icon.common.check : imgSource.icon.common.close} />
+            <img className={`todo-check ${todo.done ? "done" : ""}`} onClick={() => { dispatch(TodoActionCreators.toggleTodo(todo.id)); }} src={todo.done ? imgSource.icon.common.check : imgSource.icon.common.close} />
             <img className="todo-remove" onClick={() => { dispatch(TodoActionCreators.removeTodo(todo.id)); }} src={imgSource.icon.common.trash} />
         </div>
     );
