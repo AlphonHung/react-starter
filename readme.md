@@ -7,6 +7,7 @@
 * [View](#View)
 * [Component](#Component)
 * [i18n](#i18n)
+* [Image和Color](#Image和Color)
 * [style](#Style)
 * [Redux](#Redux)
 * [Api](#Api)
@@ -18,22 +19,29 @@
 ### interface
 為確保使用到的物件格式皆相同，可於src/domain內自定義interface。若有建立新檔案，記得於src/domain/index/ts內export。
 ```
-export interface IMyInterface {
+export interface IDemoUser {
     // 自訂物件屬性
     name: string;
     age: number;
+    gender: GenderType; // 請參考下方types說明
+    remark?: string; // 屬性加上問號代表該屬性可為undefined
 }
-```
-使用interface
-```
-import { IMyInterface } from '~/domain';
-const obj: IMyInterface = { name: "", age: 0 }
 ```
 
 ### types
 定義單一屬性可接受的值，確保該屬性不會在開發過程中誤植例外狀況。
+使用interface
 ```
-export type GenderType = 'male' | 'female';
+export type GenderType = "male" | "female";
+```
+使用interface與type
+```
+import { IDemoUser } from '~/domain';
+const demo: IDemoUser = {
+    name: "John Doe",
+    age: 20,
+    gender: "male" // 若此處不為指定的"male"或"female"即報錯
+}
 ```
 
 ---
@@ -101,12 +109,27 @@ const DemoComponent = () => {
 請參考LocaleSelector.tsx
 
 ---
+## Image&Color
+圖片存放路徑：src/assets/img，圖片與顏色統一由src/assets/scss/variable.scss管理，請勿在組件和其他scss中直接指定靜態資源路徑或色碼。
+[參考網站](https://medium.com/d-d-mag/%E4%BD%A0%E5%8F%AF%E8%83%BD%E4%B8%8D%E7%9F%A5%E9%81%93%E7%9A%84-sass-%E6%8A%80%E5%B7%A7-c97d4d5e0fc4)
+
+### 圖片使用方式
+在css設為背景
+```
+.todo-check {
+    background-image: map-get($images, check);
+}
+```
+### 顏色使用方式
+```
+.todo-id {
+    color: map-get($colors, text-basic);
+}
+```
+
+---
 ## Style
 以sass實作，scss檔案存放於src/assets/scss底下，依照使用範圍存放於各子資料夾(views: 頁面, components: 組件, shared: 全域共用)。其中shared內的scss由src/assets/scss/shared.scss統一引入，其他scss要使用shared內容時只需引入此檔案即可。
-| shared | 目標 |
-| :-- | :-- |
-| color | 統一管理整個專案使用到的顏色 |
-| animation | 自定義動畫庫與呼叫方式 |
 
 ### 建立scss
 每一個組件或頁面的tsx搭配一個同名scss檔，注意每個class的上下階層關係
@@ -238,4 +261,5 @@ const demoComponent = () => {
 ---
 ## Hooks
 以[Custom Hook Pattern](https://www.morrisctech.com/content/2019/11/30/react_custom_hook_test/)撰寫可自帶狀態、可獨立執行的邏輯。每次使用該自訂hook時，皆為獨立個體。
+使用時機：無畫面需求，可被重複使用的純邏輯。
 可參考src/hooks/useI18n.ts
