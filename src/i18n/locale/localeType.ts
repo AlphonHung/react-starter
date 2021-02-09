@@ -18,10 +18,16 @@ export interface LocaleType {
             cancel: string;
             reload: string;
             add: string;
+            save: string;
         };
     };
-    todo: {
-        message: {
+    view: {
+        home: {
+            welcome: string;
+        };
+    }
+    component: {
+        todo: {
             current_todo: string; // 第一順位任務
             none_todo: string; // 目前無任務
         }

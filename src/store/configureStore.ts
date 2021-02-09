@@ -5,10 +5,8 @@ import { rootReducer } from "./rootReducer";
 
 const sagaMiddleware = createSagaMiddleware();
 
-const configureStore = () => {
+export const configureStore = () => {
     const store = createStore(rootReducer, applyMiddleware(sagaMiddleware));
     sagaMiddleware.run(rootSaga);
     return store;
 };
-
-export default configureStore;

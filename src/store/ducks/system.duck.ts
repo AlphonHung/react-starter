@@ -29,7 +29,7 @@ type SystemAction
     | InitAppAction;
 
 export const SystemActionCreators = {
-    /** Loading Flags */
+    /** Loading Flags，可作為是否正在執行非同步動作的判斷依據 */
     addLoadingFlag: (data: string): SystemAction => ({ type: SystemActionTypes.ADD_LOADING_FLAG, data }),
     removeLoadingFlag: (data: string): SystemAction => ({ type: SystemActionTypes.REMOVE_LOADING_FLAG, data }),
     /** 初始化app */

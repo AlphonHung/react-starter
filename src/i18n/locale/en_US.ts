@@ -15,11 +15,17 @@ const en_US: LocaleType = {
             confirm: "Confirm",
             cancel: "Cancel",
             reload: "Reload",
-            add: "Add"
+            add: "Add",
+            save: "Save"
         }
     },
-    todo: {
-        message: {
+    view: {
+        home: {
+            welcome: "Hello World English"
+        },
+    },
+    component: {
+        todo: {
             current_todo: "Current Todo",
             none_todo: "Nothing to be done."
         }

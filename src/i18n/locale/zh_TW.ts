@@ -15,11 +15,17 @@ const zh_TW: LocaleType = {
             confirm: "確定",
             cancel: "取消",
             reload: "重新整理",
-            add: "新增"
+            add: "新增",
+            save: "存擋"
         }
     },
-    todo: {
-        message: {
+    view: {
+        home: {
+            welcome: "Hello World 中文"
+        },
+    },
+    component: {
+        todo: {
             current_todo: "目前任務",
             none_todo: "沒有要做的事"
         }

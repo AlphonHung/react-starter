@@ -47,6 +47,15 @@ module.exports = {
                     { loader: 'css-loader' },
                     { loader: 'sass-loader' }
                 ]
+            },
+            {
+                test: /\.(png|jpe?g|gif)$/i,
+                loader: 'url-loader', // url-loader可將資源轉為base64格式，提高效能(但增加bundle.js size)
+                options: {
+                    name: 'assets/img/[name].[chunkhash].[ext]',
+                    limit: 8192, // 單位bytes, 限制可轉為base64資源的大小, 超過大小改使用file-loader
+                    esModule: false
+                }
             }
         ]
     },
