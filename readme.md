@@ -17,6 +17,7 @@
 ## Domain
 存放interfaces與types等typescript特殊定義，開發時方便偵錯。
 ### interface
+用途：確保物件格式一致
 為確保使用到的物件格式皆相同，可於src/domain內自定義interface。若有建立新檔案，記得於src/domain/index/ts內export。
 ```
 export interface IDemoUser {
@@ -29,12 +30,12 @@ export interface IDemoUser {
 ```
 
 ### types
-定義單一屬性可接受的值，確保該屬性不會在開發過程中誤植例外狀況。
-使用interface
+用途：確保屬性值符合指定範圍
+定義單一屬性可接受的值，讓該屬性不會在開發過程中誤植例外狀況。
 ```
 export type GenderType = "male" | "female";
 ```
-使用interface與type
+### 使用interface與type
 ```
 import { IDemoUser } from '~/domain';
 const demo: IDemoUser = {
@@ -113,23 +114,53 @@ const DemoComponent = () => {
 圖片存放路徑：src/assets/img，圖片與顏色統一由src/assets/scss/variable.scss管理，請勿在組件和其他scss中直接指定靜態資源路徑或色碼。
 [參考網站](https://medium.com/d-d-mag/%E4%BD%A0%E5%8F%AF%E8%83%BD%E4%B8%8D%E7%9F%A5%E9%81%93%E7%9A%84-sass-%E6%8A%80%E5%B7%A7-c97d4d5e0fc4)
 
+### 新增圖片與顏色
+```
+---variable.scss---
+$custom-colors: (
+    text-demo: rgb(30, 30, 30),
+);
+$images: (
+    icon-demo: url("../../img/icon/common/demo.png"),
+);
+
+```
+
+### 調整bootstrap預設顏色
+```
+---variable.scss---
+$theme-colors: (
+    "primary": rgb(200, 150, 25),
+);
+```
+
 ### 圖片使用方式
 在css設為背景
 ```
-.todo-check {
-    background-image: map-get($images, check);
+@import '../variable.scss';
+.todo-demo {
+    // 從variable.scss的$images中取得demo圖片
+    background-image: map-get($images, demo); 
 }
 ```
 ### 顏色使用方式
 ```
-.todo-id {
-    color: map-get($colors, text-basic);
+@import '../variable.scss';
+.todo-demo {
+    // 從variable.scss的$colors中取得demo文字色
+    color: map-get($colors, text-demo);
 }
 ```
 
 ---
 ## Style
-以sass實作，scss檔案存放於src/assets/scss底下，依照使用範圍存放於各子資料夾(views: 頁面, components: 組件, shared: 全域共用)。其中shared內的scss由src/assets/scss/shared.scss統一引入，其他scss要使用shared內容時只需引入此檔案即可。
+以sass實作，並引入bootstrap。
+
+scss檔案存放於src/assets/scss底下，依照使用範圍存放於各子資料夾(views: 頁面, components: 組件, shared: 全域共用)。其中shared內的scss由src/assets/scss/shared.scss統一引入，其他scss要使用shared內容時只需引入此檔案即可。
+
+若遇重複性高的css配置，請盡量使用sass提供的mixin功能，可參考src/assets/scss/shared/flex.scss
+
+若要修改bootstrap原始顏色配置，如primary,
 
 ### 建立scss
 每一個組件或頁面的tsx搭配一個同名scss檔，注意每個class的上下階層關係
@@ -155,15 +186,15 @@ import '~/assets/scss/components/HeaderNavigator.scss';
 ```
 @keyframes example {
     from {
-        color: rgb(100, 120, 120);
+        color: map-get($colors, text-basic);
     }
     to {
-        color: rgb(120, 80, 100);
+        color: map-get($colors, text-sub);
     }
 }
 ```
 ### 套用動畫
-scss內引用shared.scss後，使用anim method
+scss內引用shared.scss後，使用anim mixin method
 ```
 @import '../shared.scss';
 .home {

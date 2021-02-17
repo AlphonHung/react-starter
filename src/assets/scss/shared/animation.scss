@@ -1,4 +1,4 @@
-// 所有動畫
+@import '../variable.scss';
 
 /** 使用動畫並帶入參數的mixin */
 @mixin anim($anim) {
@@ -10,9 +10,9 @@
 /** 範例動畫改字體色 */
 @keyframes example {
     from {
-        color: rgb(100, 120, 120);
+        color: map-get($colors, text-basic);
     }
     to {
-        color: rgb(120, 80, 100);
+        color: map-get($colors, text-sub);
     }
 }
