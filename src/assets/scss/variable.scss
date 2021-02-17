@@ -14,4 +14,11 @@ $images: (
     icon-check: url("../../img/icon/common/check.png"),
     icon-close: url("../../img/icon/common/close.png"),
     icon-trash: url("../../img/icon/common/trash.png"),
-)
+);
+
+// 覆寫bootstrap常用標籤的顏色
+// $theme-colors: (
+//     "primary": rgb(200, 50, 25),
+//     "info": tomato,
+//     "danger": teal
+// );

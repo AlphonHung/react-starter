@@ -1,5 +1,6 @@
-@import "./shared.scss";
-@import "./variable.scss";
+@import "./variable.scss"; // 變數(顏色、圖片)
+@import "./shared.scss"; // 全域共用class
+@import "~bootstrap/scss/bootstrap"; // 引入bootstrap
 
 body {
     margin: 0;
