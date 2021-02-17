@@ -5,5 +5,5 @@
 body {
     margin: 0;
     padding: 0;
-    background-color: map-get($colors, view-bg);
+    background-color: map-get($colors, view-bg); // 從變數$colors中取出view-bg的值
 }

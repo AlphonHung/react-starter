@@ -71,7 +71,7 @@ const TodoList = () => {
 /** 所有任務相關組件區塊 */
 const TodoListSet = () => (
     <div className="todo-list-set">
-        <div className="flex-row flex-spbt">
+        <div className="todo-list-control-row">
             <div className="flex-row">
                 <CurrentTask />
                 <CreateTodo />

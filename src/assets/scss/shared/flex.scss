@@ -1,3 +1,4 @@
+// 給tsx使用的className
 .flex-row {
     display: flex;
     flex-direction: row;
@@ -30,4 +31,27 @@
 }
 .flex-wrap {
     flex-wrap: wrap;
+}
+
+// 給其他scss使用的mixin
+@mixin flex-row($flexSetup) {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+    @each $key, $value in $flexSetup {
+        #{$key}: $value;
+    }
+}
+
+@mixin flex-column($flexSetup) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+    @each $key, $value in $flexSetup {
+        #{$key}: $value;
+    }
 }
