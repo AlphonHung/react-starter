@@ -1,6 +1,7 @@
 # TCG React Starter
 專案用途：以react hooks、typescript環境，整合常用套件與配置，快速開發react web app。
 建立新專案時可直接複製本專案內容，另外建立新的git repo。
+本專案以node版本v12.14.1建立
 
 ## 文章列表
 * [Domain](#Domain)
