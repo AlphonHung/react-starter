@@ -13,6 +13,7 @@
 * [Redux](#Redux)
 * [Api](#Api)
 * [Hooks](#Hooks)
+* [SEO](#SEO)
 
 ---
 ## Domain
@@ -297,3 +298,8 @@ const demoComponent = () => {
 以[Custom Hook Pattern](https://www.morrisctech.com/content/2019/11/30/react_custom_hook_test/)撰寫可自帶狀態、可獨立執行的邏輯。每次使用該自訂hook時，皆為獨立個體。
 使用時機：無畫面需求，可被重複使用的純邏輯。
 可參考```src/hooks/useI18n.ts```
+
+---
+## SEO
+[參考網站](https://yakimhsu.com/project/project_w6_HTML_SEO.html)
+網站開發完成後，在```src/assets/index.html```裡面加上title, description, og標籤等內容
