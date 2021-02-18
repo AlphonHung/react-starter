@@ -159,7 +159,7 @@ $theme-colors: (
 
 scss檔案存放於```src/assets/scss```底下，依照使用範圍存放於各子資料夾(views: 頁面, components: 組件, shared: 全域共用)。其中shared內的scss由```src/assets/scss/shared.scss```統一引入，其他scss要使用shared內容時只需引入此檔案即可。
 
-若遇重複性高的css配置，請盡量使用sass提供的mixin功能，可參考```src/assets/scss/shared/flex.scss```。
+若遇重複性高的css配置，請盡量使用sass提供的mixin功能，可參考```src/assets/scss/shared/mixin.scss```。
 
 ### 判斷度量單位是否需隨螢幕大小變化
 為使不同螢幕大小有相近的顯示效果，使用css調整度量屬性時先判斷是否需依螢幕大小而變，若為是則盡量以rem實作，減少使用px這種固定值。
