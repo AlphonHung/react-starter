@@ -1,7 +1,7 @@
 # TCG React Starter
 專案用途：以react hooks、typescript環境，整合常用套件與配置，快速開發react web app。
 建立新專案時可直接複製本專案內容，另外建立新的git repo。
-本專案以node版本v12.14.1建立
+本專案以node版本**v12.14.1**建立
 
 ## 文章列表
 * [Domain](#Domain)
@@ -19,7 +19,7 @@
 存放interfaces與types等typescript特殊定義，開發時方便偵錯。
 ### interface
 用途：確保物件格式一致
-為確保使用到的物件格式皆相同，可於src/domain內自定義interface。若有建立新檔案，記得於src/domain/index/ts內export。
+為確保使用到的物件格式皆相同，可於```src/domain```內自定義interface。若有建立新檔案，記得於```src/domain/index/ts內export```。
 ```
 export interface IDemoUser {
     // 自訂物件屬性
@@ -48,7 +48,7 @@ const demo: IDemoUser = {
 
 ---
 ## View
-擁有一個URL的頁面組件，存放於src/views底下，命名規則：[name]View，如HomeView。
+擁有一個URL的頁面組件，存放於src/views底下，命名規則：```[name]View```，如HomeView。
 
 ### 建立方式
 1. 在views folder下建立新的tsx
@@ -78,7 +78,7 @@ import { Link } from 'react-router-dom';
 ---
 ## Component
 存放除了views以外的組件，相同類型或目的的組件可建置子資料夾方便管理。開發組件時，請盡量使每個組件目的單純化，保持每個檔案不超過300行程式碼為標準。
-請參考src/components/TodoListSet.tsx
+請參考```src/components/TodoListSet.tsx```
 
 ---
 ## i18n
@@ -86,8 +86,8 @@ import { Link } from 'react-router-dom';
 
 ### 新增語系
 目前實作繁中與英文，若要新增其他語系，請依照步驟
-1. 在src/i18n/index.ts內，仿照原有內容新增語系設定
-2. 在src/i18n/locale底下新增語系檔
+1. 在```src/i18n/index.ts```內，仿照原有內容新增語系設定
+2. 在```src/i18n/locale```底下新增語系檔
 ```
 import { LocaleType } from './localeType';
 const en_US: LocaleType = {
@@ -95,7 +95,7 @@ const en_US: LocaleType = {
 }
 ```
 ### 新增翻譯內容
-先修改src/i18n/locale底下的localeType.ts，再修改同資料夾底下其他檔案
+先修改```src/i18n/locale```底下的localeType.ts，再修改同資料夾底下其他檔案
 ### 使用翻譯文字
 利用react-i18next提供的hooks，取得並使用翻譯method t，參數即為localeType.ts內定義的物件路徑
 ```
@@ -108,11 +108,11 @@ const DemoComponent = () => {
 }
 ```
 ### 切換語系
-請參考LocaleSelector.tsx
+請參考```/sr/components/LocaleSelector.tsx```
 
 ---
 ## Image&Color
-圖片存放路徑：src/assets/img，圖片與顏色統一由src/assets/scss/variable.scss管理，請勿在組件和其他scss中直接指定靜態資源路徑或色碼。
+圖片存放路徑：src/assets/img，圖片與顏色統一由```src/assets/scss/variable.scss```管理，請勿在組件和其他scss中直接指定靜態資源路徑或色碼。
 [參考網站](https://medium.com/d-d-mag/%E4%BD%A0%E5%8F%AF%E8%83%BD%E4%B8%8D%E7%9F%A5%E9%81%93%E7%9A%84-sass-%E6%8A%80%E5%B7%A7-c97d4d5e0fc4)
 
 ### 新增圖片與顏色
@@ -157,9 +157,9 @@ $theme-colors: (
 ## Style
 以sass實作，並引入bootstrap。
 
-scss檔案存放於src/assets/scss底下，依照使用範圍存放於各子資料夾(views: 頁面, components: 組件, shared: 全域共用)。其中shared內的scss由src/assets/scss/shared.scss統一引入，其他scss要使用shared內容時只需引入此檔案即可。
+scss檔案存放於```src/assets/scss```底下，依照使用範圍存放於各子資料夾(views: 頁面, components: 組件, shared: 全域共用)。其中shared內的scss由```src/assets/scss/shared.scss```統一引入，其他scss要使用shared內容時只需引入此檔案即可。
 
-若遇重複性高的css配置，請盡量使用sass提供的mixin功能，可參考src/assets/scss/shared/flex.scss
+若遇重複性高的css配置，請盡量使用sass提供的mixin功能，可參考```src/assets/scss/shared/flex.scss```
 
 若要修改bootstrap原始顏色配置，如primary,
 
@@ -183,7 +183,7 @@ scss檔案存放於src/assets/scss底下，依照使用範圍存放於各子資�
 import '~/assets/scss/components/HeaderNavigator.scss';
 ```
 ### 建立動畫
-於src/assets/scss/shared/animation.scss內新增動畫
+於```src/assets/scss/shared/animation.scss```內新增動畫
 ```
 @keyframes example {
     from {
@@ -238,9 +238,9 @@ scss內引用shared.scss後，使用anim mixin method
 
 ---
 ## Api
-本專案使用axios，src/lib/api.ts統一管理實體與定義路徑
+本專案使用axios，```src/lib/api.ts```統一管理實體與定義路徑
 ### 定義Api
-於src/lib/api.ts內，將同一類型或後端url相同分類的api集中在同一物件中，並於export的api物件中定義
+```於src/lib/api.ts```內，將同一類型或後端url相同分類的api集中在同一物件中，並於export的api物件中定義
 ```
 const auth = {
     login: (data: { account: string, password: string }) => mainInstance.post('some path', data),
@@ -294,4 +294,4 @@ const demoComponent = () => {
 ## Hooks
 以[Custom Hook Pattern](https://www.morrisctech.com/content/2019/11/30/react_custom_hook_test/)撰寫可自帶狀態、可獨立執行的邏輯。每次使用該自訂hook時，皆為獨立個體。
 使用時機：無畫面需求，可被重複使用的純邏輯。
-可參考src/hooks/useI18n.ts
+可參考```src/hooks/useI18n.ts```
