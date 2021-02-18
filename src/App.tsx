@@ -6,6 +6,7 @@ import useI18n from '~/hooks/useI18n';
 import Header from '~/components/Header';
 import Routes from './routers/routes';
 import '~/assets/scss/App.scss';
+import '~lib/rem';
 
 /** 根節點 */
 const App = () => {

@@ -3,53 +3,53 @@
 
 .todo-list-set {
     border: 1px solid map-get($colors, border-common);
-    border-radius: 10px;
-    margin: 10px;
-    padding: 10px;
+    border-radius: 0.1rem;
+    margin: 0.1rem;
+    padding: 0.1rem;
 
     .todo-list-control-row {
         @include flex-row((justify-content: space-between));
     }
 
     .new-todo-area {
-        font-size: 14px;
-        margin-left: 20px;
+        font-size: 0.14rem;
+        margin-left: 0.2rem;
     }
 
     .todo-list {
         @include flex-row((justify-content: flex-start, align-items: flex-start, flex-wrap: wrap));
-        margin-top: 10px;
+        margin-top: 0.1rem;
 
         .todo {
             position: relative;
             width: 20%;
             @include flex-column((justify-content: flex-start));
             background-color: map-get($colors, component-bg);
-            border-radius: 10px;
-            padding: 12px;
+            border-radius: 0.1rem;
+            padding: 0.12rem;
 
             &:hover {
-                box-shadow: 2px 2px 5px map-get($colors, border-shadow);
+                box-shadow: 0.02rem 0.02rem 0.05rem map-get($colors, border-shadow);
             }
 
             &:nth-child(n+2) {
-                margin-left: 10px;
+                margin-left: 0.1rem;
             }
 
             .todo-title {
-                font-size: 18px;
+                font-size: 0.18rem;
                 font-weight: bold;
                 color: map-get($colors, text-basic);
             }
 
             .todo-id {
-                font-size: 10px;
+                font-size: 0.1rem;
                 color: map-get($colors, text-sub);
             }
 
             .todo-check {
-                width: 40px;
-                height: 40px;
+                width: 0.4rem;
+                height: 0.4rem;
                 cursor: pointer;
                 background-image: map-get($images, close);
                 background-size: contain;
@@ -60,11 +60,11 @@
             }
 
             .todo-remove {
-                width: 20px;
-                height: 20px;
+                width: 0.2rem;
+                height: 0.2rem;
                 position: absolute;
-                right: 5px;
-                top: 5px;
+                right: 0.05rem;
+                top: 0.05rem;
                 cursor: pointer;
             }
         }

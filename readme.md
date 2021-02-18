@@ -19,7 +19,7 @@
 存放interfaces與types等typescript特殊定義，開發時方便偵錯。
 ### interface
 用途：確保物件格式一致
-為確保使用到的物件格式皆相同，可於```src/domain```內自定義interface。若有建立新檔案，記得於```src/domain/index/ts內export```。
+為確保使用到的物件格式皆相同，可於```src/domain```內自定義interface。若有建立新檔案，記得於```src/domain/index/ts```內export。
 ```
 export interface IDemoUser {
     // 自訂物件屬性
@@ -159,9 +159,11 @@ $theme-colors: (
 
 scss檔案存放於```src/assets/scss```底下，依照使用範圍存放於各子資料夾(views: 頁面, components: 組件, shared: 全域共用)。其中shared內的scss由```src/assets/scss/shared.scss```統一引入，其他scss要使用shared內容時只需引入此檔案即可。
 
-若遇重複性高的css配置，請盡量使用sass提供的mixin功能，可參考```src/assets/scss/shared/flex.scss```
+若遇重複性高的css配置，請盡量使用sass提供的mixin功能，可參考```src/assets/scss/shared/flex.scss```。
 
-若要修改bootstrap原始顏色配置，如primary,
+### 判斷度量單位是否需隨螢幕大小變化
+為使不同螢幕大小有相近的顯示效果，使用css調整度量屬性時先判斷是否需依螢幕大小而變，若為是則盡量以rem實作，減少使用px這種固定值。
+rem的基礎值由```src/lib/rem.js```實作。
 
 ### 建立scss
 每一個組件或頁面的tsx搭配一個同名scss檔，注意每個class的上下階層關係
@@ -173,7 +175,7 @@ scss檔案存放於```src/assets/scss```底下，依照使用範圍存放於各�
     align-items: center;
 
     .page-link {
-        padding: 0 5px;
+        padding: 0 0.05rem;
     }
 }
 
@@ -199,7 +201,7 @@ scss內引用shared.scss後，使用anim mixin method
 ```
 @import '../shared.scss';
 .home {
-    padding: 10px;
+    padding: 0.1rem;
     @include anim(( name: example, duration: 1s, iteration-count: infinite, direction: alternate ))
     // 上面一行效果等同於
     // animation-name: example;
@@ -225,22 +227,22 @@ scss內引用shared.scss後，使用anim mixin method
 | reducer | 依據action.type決定如何修改資料 |
 
 新增檔案後再執行下列事項
-1. src/store/ducks/index.ts內必須export
-2. src/store/rootReducer.ts內引用該duck的reducer
+1. ```src/store/ducks/index.ts```內必須export
+2. ```src/store/rootReducer.ts```內引用該duck的reducer
 
 ### sagas
 當duck內定義的action有需要執行非同步作業、或延伸執行其他action時才需定義。
 請直接參考專案內現有saga檔案。
 
 新增檔案後再執行下列事項
-1. src/store/sagas/index.ts內必須export
-2. src/store/rootSaga.ts內引用該saga
+1. ```src/store/sagas/index.ts```內必須export
+2. ```src/store/rootSaga.ts```內引用該saga
 
 ---
 ## Api
 本專案使用axios，```src/lib/api.ts```統一管理實體與定義路徑
 ### 定義Api
-```於src/lib/api.ts```內，將同一類型或後端url相同分類的api集中在同一物件中，並於export的api物件中定義
+於```src/lib/api.ts```內，將同一類型或後端url相同分類的api集中在同一物件中，並於export的api物件中定義
 ```
 const auth = {
     login: (data: { account: string, password: string }) => mainInstance.post('some path', data),
