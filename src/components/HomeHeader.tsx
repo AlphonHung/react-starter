@@ -4,11 +4,11 @@ import LocaleSelector from '~/components/LocaleSelector';
 import '~/assets/scss/components/Header.scss';
 
 /** 上方Header */
-const Header = () => (
-    <header className="header">
+const HomeHeader = () => (
+    <header className="home-header">
         <HeaderNavigator />
         <LocaleSelector />
     </header>
 )
 
-export default Header;
+export default HomeHeader;

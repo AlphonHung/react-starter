@@ -16,10 +16,16 @@ const zh_TW: LocaleType = {
             cancel: "取消",
             reload: "重新整理",
             add: "新增",
-            save: "存擋"
+            save: "存擋",
+            login: "登入",
+            logout: "登出",
         }
     },
     view: {
+        intro: {
+            production_title: "Demo產品",
+            production_desc: "Demo描述，我只是個範例...",
+        },
         home: {
             welcome: "Hello World 中文"
         },

@@ -16,10 +16,16 @@ const en_US: LocaleType = {
             cancel: "Cancel",
             reload: "Reload",
             add: "Add",
-            save: "Save"
+            save: "Save",
+            login: "Login",
+            logout: "Logout",
         }
     },
     view: {
+        intro: {
+            production_title: "Demo Production",
+            production_desc: "Demo Description, this is a...",
+        },
         home: {
             welcome: "Hello World English"
         },

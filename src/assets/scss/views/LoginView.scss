@@ -1,0 +1,11 @@
+@import '../shared';
+
+.login {
+    height: 100%;
+    @include flex-column(());
+
+    .login-button {
+        margin-top: 0.3rem;
+        font-size: 0.2rem;
+    }
+}

@@ -19,9 +19,15 @@ export interface LocaleType {
             reload: string;
             add: string;
             save: string;
+            login: string;
+            logout: string;
         };
     };
     view: {
+        intro: {
+            production_title: string; // 產品名稱
+            production_desc: string; // 產品描述
+        };
         home: {
             welcome: string;
         };

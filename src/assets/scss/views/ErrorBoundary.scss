@@ -1,0 +1,11 @@
+@import '../variable.scss';
+@import '../shared';
+
+.error-boundary {
+    flex: 1;
+
+    .error-boundary-content {
+        flex: 1;
+        @include flex-column(());
+    }
+}
