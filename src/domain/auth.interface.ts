@@ -1,3 +1,9 @@
+/** 登入帳密 */
+export interface ILoginForm {
+    account: string;
+    password: string;
+}
+
 export interface IUser {
     id: string;
     userName: string;
@@ -10,7 +16,6 @@ export interface IAuthData {
     access_token: string;
     expired_at: number;
     refresh_token: string;
-    subject_id: string;
     user: IUser;
 }
 

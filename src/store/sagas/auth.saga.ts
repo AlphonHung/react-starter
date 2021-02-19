@@ -40,7 +40,19 @@ function* register(action: AuthRegisterAction) {
     yield put(SystemActionCreators.removeLoadingFlag(action.type));
 }
 
-/** 執行登入動作 */
+/** 驗證帳密嘗試登入 */
+function* tryLogin(action: AuthLoginAction) {
+    yield put(SystemActionCreators.addLoadingFlag(action.type));
+    // 待未來實作
+    // const res = yield call(api.auth.tryLogin, action.data);
+    // if (res?.data?.code === "00") {
+    //     yield put(AuthActionCreators.login(res.data.data));
+    // } else {
+    // }
+    yield put(SystemActionCreators.removeLoadingFlag(action.type));
+}
+
+/** 驗證通過後執行登入動作 */
 function* login(action: AuthLoginAction) {
     yield put(SystemActionCreators.addLoadingFlag(action.type));
     const authData = action.data;
@@ -81,6 +93,7 @@ export function* AuthSaga() {
         takeEvery(AuthActionTypes.CHECK_LOGIN, checkLogin),
         takeEvery(AuthActionTypes.REFRESH_TOKEN, refreshToken),
         takeEvery(AuthActionTypes.REGISTER, register),
+        takeEvery(AuthActionTypes.TRY_LOGIN, tryLogin),
         takeEvery(AuthActionTypes.LOGIN, login),
         takeEvery(AuthActionTypes.GET_USER_PROFILE, getProfile),
         takeEvery(AuthActionTypes.PATCH_USER_PROFILE, patchProfile),

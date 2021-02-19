@@ -1,17 +1,25 @@
 import { lazy } from 'react';
 import { IRouterMap } from '~/domain';
+import IntroView from '~/views/IntroView';
+import LoginView from '~/views/LoginView';
 
-export const NormalRoutes: IRouterMap[] = [
+// 所有路由一覽
+
+/** 未登入可造訪的頁面 */
+export const UnAuthRoutes: IRouterMap[] = [
     {
         path: '/intro',
-        component: lazy(() => import('~/views/IntroView')),
+        component: IntroView,
+        authRedirect: '/',
     },
     {
         path: '/login',
-        component: lazy(() => import('~/views/LoginView')),
+        component: LoginView,
+        authRedirect: '/',
     },
 ];
 
+/** 登入後有共享header的頁面 */
 export const HeaderRoutes: IRouterMap[] = [
     {
         path: '/',

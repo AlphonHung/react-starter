@@ -3,13 +3,4 @@
 .intro {
     height: 100%;
     @include flex-column(());
-
-    .production-title {
-        font-size: 0.3rem;
-    }
-
-    .production-desc {
-        font-size: 0.15rem;
-        margin-bottom: 0.2rem;
-    }
 }
