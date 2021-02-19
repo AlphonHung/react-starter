@@ -3,7 +3,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import { IRouterMap } from '~/domain';
 import useAuth from '~/hooks/useAuth';
 import { NormalRoutes, HeaderRoutes } from '~/routers/RouteConfig';
-import HeaderNavigator from '~/components/HeaderNavigator';
+import HomeHeader from '~/components/HomeHeader';
 
 /** 需要登入驗證的頁面 */
 const PrivateRoute = (props: any) => {
@@ -34,20 +34,13 @@ const MainRoute = () => {
             <Route render={props => {
                 return (
                     <React.Fragment>
-                        <HeaderNavigator />
-                        {RenderRoute(HeaderRoutes)}
+                        <HomeHeader />
+                        <Switch>
+                            {RenderRoute(HeaderRoutes)}
+                        </Switch>
                     </React.Fragment>
                 )
             }} />
-            {/* <Route exact path="/" render={() => {
-                if (auth) return (<Redirect to="/home" />);
-                return <IntroView />
-            }} />
-            <Route path="/login" component={LoginView} />
-            <PrivateRoute path="/home">
-                <HomeRoute />
-            </PrivateRoute>
-            <Route path="*" component={NoMatchView} /> */}
         </Switch>
     )
 };

@@ -9,18 +9,6 @@ import LoginView from '~/views/LoginView';
 
 export const NormalRoutes: IRouterMap[] = [
     {
-        path: '/',
-        component: HomeView,
-        exact: true,
-        auth: true,
-        noAuthRedirect: '/intro',
-    },
-    {
-        path: '/todo',
-        component: TodoView,
-        auth: true,
-    },
-    {
         path: '/intro',
         component: IntroView,
     },
@@ -32,7 +20,15 @@ export const NormalRoutes: IRouterMap[] = [
 
 export const HeaderRoutes: IRouterMap[] = [
     {
-        path: '/h-intro',
-        component: IntroView
-    }
+        path: '/',
+        component: HomeView,
+        exact: true,
+        auth: true,
+        noAuthRedirect: '/intro',
+    },
+    {
+        path: '/todo',
+        component: TodoView,
+        auth: true,
+    },
 ];
