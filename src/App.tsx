@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { HashRouter } from 'react-router-dom';
-import { AuthActionCreators, SystemActionCreators } from '~/store'
+import { AuthActionCreators } from '~/store'
 import useI18n from '~/hooks/useI18n';
 import ErrorBoundary from '~/views/ErrorBoundary';
 import MainRoute from './routers/MainRoute';
@@ -15,7 +15,6 @@ const App = () => {
 
     useEffect(() => {
         dispatch(AuthActionCreators.checkLogin());
-        dispatch(SystemActionCreators.initApp());
     }, []);
 
     if (!i18nInitialized) return null;

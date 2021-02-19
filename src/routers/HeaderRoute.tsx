@@ -1,4 +1,4 @@
-import React, { Suspense, lazy } from 'react';
+import React, { Suspense } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { HeaderRoutes } from '~/routers/RouteConfig';
 import HomeHeader from '~/components/HomeHeader';
@@ -10,7 +10,7 @@ const HeaderRoute = () => (
         return (
             <React.Fragment>
                 <HomeHeader />
-                <Suspense fallback={<div>Second loading...</div>}>
+                <Suspense fallback={<div>Loading...</div>}>
                     <Switch>
                         {HeaderRoutes.map((route, index) => (<SingleRoute key={`header_route_${index}`} {...route} />))}
                     </Switch>
