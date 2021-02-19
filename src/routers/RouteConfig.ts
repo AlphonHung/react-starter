@@ -1,34 +1,28 @@
+import { lazy } from 'react';
 import { IRouterMap } from '~/domain';
-import HomeView from '~/views/HomeView';
-import TodoView from '~/views/TodoView';
-import IntroView from '~/views/IntroView';
-import LoginView from '~/views/LoginView';
-// import AsyncComponent from '~/components/AsyncComponent';
-
-// const _import_views = (file: string) => AsyncComponent(() => import(file));
 
 export const NormalRoutes: IRouterMap[] = [
     {
         path: '/intro',
-        component: IntroView,
+        component: lazy(() => import('~/views/IntroView')),
     },
     {
         path: '/login',
-        component: LoginView,
+        component: lazy(() => import('~/views/LoginView')),
     },
 ];
 
 export const HeaderRoutes: IRouterMap[] = [
     {
         path: '/',
-        component: HomeView,
+        component: lazy(() => import('~/views/HomeView')),
         exact: true,
         auth: true,
         noAuthRedirect: '/intro',
     },
     {
         path: '/todo',
-        component: TodoView,
+        component: lazy(() => import('~/views/TodoView')),
         auth: true,
     },
 ];

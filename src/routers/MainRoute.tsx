@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React, { Suspense } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { IRouterMap } from '~/domain';
 import useAuth from '~/hooks/useAuth';
@@ -17,7 +17,7 @@ const PrivateRoute = (props: any) => {
     )
 }
 
-/** 依照route的auth決定應使用的Route組件 */
+/** 依照route config的auth決定應使用的Route組件 */
 const RenderRoute = (configs: IRouterMap[]) => configs.map((route, index) => {
     if (route.auth) return <PrivateRoute key={`route_${index}`} {...route} />;
     else return <Route key={`route_${index}`} path={route.path} component={route.component} />;
@@ -27,21 +27,25 @@ const RenderRoute = (configs: IRouterMap[]) => configs.map((route, index) => {
 const MainRoute = () => {
     const auth = useAuth.authorized();
     return (
-        <Switch>
-            {/** 整頁頁面組件 */}
-            {RenderRoute(NormalRoutes)}
-            {/** 共享組件頁面 */}
-            <Route render={props => {
-                return (
-                    <React.Fragment>
-                        <HomeHeader />
-                        <Switch>
-                            {RenderRoute(HeaderRoutes)}
-                        </Switch>
-                    </React.Fragment>
-                )
-            }} />
-        </Switch>
+        <Suspense fallback={<div>Loading...</div>}>
+            <Switch>
+                {/** 整頁頁面組件 */}
+                {RenderRoute(NormalRoutes)}
+                {/** 共享組件頁面 */}
+                <Route render={props => {
+                    return (
+                        <React.Fragment>
+                            <HomeHeader />
+                            <Suspense fallback={<div>Second loading...</div>}>
+                                <Switch>
+                                    {RenderRoute(HeaderRoutes)}
+                                </Switch>
+                            </Suspense>
+                        </React.Fragment>
+                    )
+                }} />
+            </Switch>
+        </Suspense>
     )
 };
 
