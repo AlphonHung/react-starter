@@ -1,6 +1,6 @@
 export const StorageKeys = {
     Auth: {
-        AuthData: 'AUTH/AuthData', // User主要驗證資訊
+        AuthData: 'AUTH/AUTH_DATA', // User主要驗證資訊
         CurrentUser: 'AUTH/CURRENT_USER' // 已登入的user
     },
     System: {

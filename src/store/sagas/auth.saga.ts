@@ -1,6 +1,7 @@
 import { takeEvery, put, call, all } from 'redux-saga/effects';
 import api from '~/lib/api';
-import { AuthRegisterAction, AuthActionTypes, AuthActionCreators, SystemActionCreators, AuthLoginAction, AuthRefreshTokenAction, AuthPatchUserProfileAction, AuthCheckLoginAction, AuthGetUserProfileAction } from '../ducks';
+import { IAuthData } from '~/domain';
+import { AuthRegisterAction, AuthActionTypes, AuthActionCreators, SystemActionCreators, AuthLoginAction, AuthRefreshTokenAction, AuthPatchUserProfileAction, AuthCheckLoginAction, AuthGetUserProfileAction, AuthFakeLoginAction, AuthLogoutAction } from '../ducks';
 import { StorageKeys } from '~/constants';
 
 /** 檢查本地原先是否有驗證資料 */
@@ -25,6 +26,7 @@ function* refreshToken(action: AuthRefreshTokenAction) {
     // } else {
     //     yield put(AuthActionCreators.login(action.data));
     // }
+    yield put(AuthActionCreators.login(action.data));
     yield put(SystemActionCreators.removeLoadingFlag(action.type));
 }
 
@@ -63,6 +65,29 @@ function* login(action: AuthLoginAction) {
     yield put(SystemActionCreators.removeLoadingFlag(action.type));
 }
 
+/** 開發使用的假登入 */
+function* fakeLogin(action: AuthFakeLoginAction) {
+    // 假的驗證資料
+    const fakeAuth: IAuthData = {
+        access_token: "QQ123",
+        expired_at: Date.now() + (1000 * 60 * 60 * 24),
+        refresh_token: "RR123",
+        user: {
+            id: "Akjdfa15w",
+            userName: "develper",
+            displayName: "Developer R",
+            email: "dev@gmail.com"
+        }
+    }
+    localStorage.setItem(StorageKeys.Auth.AuthData, JSON.stringify(fakeAuth)); // 儲存至storage
+    yield put(AuthActionCreators.checkLogin()); // 觸發檢查login
+}
+
+/** 登出額外處理資料 */
+function* logout(action: AuthLogoutAction) {
+    localStorage.removeItem(StorageKeys.Auth.AuthData);
+}
+
 /** 取得User Profile(目前profile內已含avatar相同資料) */
 function* getProfile(action: AuthGetUserProfileAction) {
     yield put(SystemActionCreators.addLoadingFlag(action.type));
@@ -95,6 +120,8 @@ export function* AuthSaga() {
         takeEvery(AuthActionTypes.REGISTER, register),
         takeEvery(AuthActionTypes.TRY_LOGIN, tryLogin),
         takeEvery(AuthActionTypes.LOGIN, login),
+        takeEvery(AuthActionTypes.FAKE_LOGIN, fakeLogin),
+        takeEvery(AuthActionTypes.LOGOUT, logout),
         takeEvery(AuthActionTypes.GET_USER_PROFILE, getProfile),
         takeEvery(AuthActionTypes.PATCH_USER_PROFILE, patchProfile),
     ])

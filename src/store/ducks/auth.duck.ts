@@ -110,21 +110,6 @@ export const AuthReducer = produce((draft: IStateType, action: AuthAction) => {
             draft.authData = (action as AuthLoginAction).data;
             return;
         }
-        case AuthActionTypes.FAKE_LOGIN: {
-            const fakeAuth: IAuthData = {
-                access_token: "QQ123",
-                expired_at: Date.now() + (1000 * 60 * 60 * 24),
-                refresh_token: "RR123",
-                user: {
-                    id: "Akjdfa15w",
-                    userName: "develper",
-                    displayName: "Developer R",
-                    email: "dev@gmail.com"
-                }
-            }
-            draft.authData = fakeAuth;
-            return;
-        }
         case AuthActionTypes.LOGOUT: {
             draft.authData = undefined;
             return;
