@@ -1,10 +1,12 @@
 # TCG React Starter
 專案用途：以react hooks、typescript環境，整合常用套件與配置，快速開發react web app。
-建立新專案時可直接複製本專案內容，另外建立新的git repo。
+前置知識：[React Function Component](https://zh-hant.reactjs.org/docs/components-and-props.html)、[React Hooks](https://zh-hant.reactjs.org/docs/hooks-intro.html)。
+使用方式：建立新專案時可直接複製本專案內容，另外建立新的git repo。
 本專案以node版本**v12.14.1**建立
 
 ## 文章列表
 * [Domain](#Domain)
+* [Router](#Router)
 * [View](#View)
 * [Component](#Component)
 * [i18n](#i18n)
@@ -17,7 +19,7 @@
 
 ---
 ## Domain
-存放interfaces與types等typescript特殊定義，開發時方便偵錯。
+存放**interfaces**與**types**等typescript特殊定義，開發時方便偵錯。
 ### interface
 用途：確保物件格式一致
 為確保使用到的物件格式皆相同，可於```src/domain```內自定義interface。若有建立新檔案，記得於```src/domain/index/ts```內export。
@@ -48,42 +50,76 @@ const demo: IDemoUser = {
 ```
 
 ---
-## View
-擁有一個URL的頁面組件，存放於src/views底下，命名規則：```[name]View```，如HomeView。
+## Router
+網站導頁使用[React Router Dom](https://reactrouter.com/web/example/basic)
+路由根節點```src/routers/MainRoute.tsx```
+路由設定檔```src/routers/RouteConfig.ts```
 
-### 建立方式
+### 路由驗證登入
+實作於```src/routers/SingleRoute.tsx```，依據路由設定檔的**auth、authRedirect、noAuthRedirect**等屬性決定render頁面組件或redirect。
+
+### 動態加載頁面
+Router使用React提供的[code spliting](https://zh-hant.reactjs.org/docs/code-splitting.html)來動態載入組件，目標為**不常使用或較龐大易影響載入速度的組件**。
+Suspense與lazy必須互相搭配，其中Suspense的fallback屬性為未載入完成前的顯示內容。可參考```src/routers/HeaderRoute.tsx```
+
+### 路由共享組件
+1. 在```src/routers/RouteConfig.ts```新增所有共享組件的路由。
+2. 建立新的實作路由檔，引用1設定的路由並加入需共享的組件，可參考```src/routers/HeaderRoute.tsx```。
+3. 將2的檔案引入根節點```src/routers/MainRoute.tsx```或其他子路由。
+
+---
+## View
+擁有一個URL的頁面組件，存放於src/views底下，命名規則：**[name]View**，如HomeView。
+
+### 建立方式(以TodoView為範例)
 1. 在views folder下建立新的tsx
 ```
 import React from 'react';
+import TodoListSet from '~/components/TodoListSet'
 
-const HomeView = () => {
-    return (
-        <div className="home">
-            <h1>Hello World</h1>
-        </div>
-    );
-}
-export default HomeView;
+/** 單純用來示範router的view */
+const TodoView = () => (
+    <div>
+        <div className="display-3">展示Todo</div>
+        <TodoListSet />
+    </div>
+)
+
+export default TodoView;
 ```
-2. 在routers folder下的routes.tsx內新增一條route，自定義path
+2. 在```src/routers/RouteConfig.ts```內新增一條路由設定
 ```
-import HomeView from '~/views/HomeView';
-<Route path="/home" component={HomeView} />
+{
+    path: '/todo',
+    component: lazy(() => import('~/views/TodoView')),
+    auth: true,
+},
 ```
 3. 在想要顯示連結的地方(本範例為HeaderNavigator.tsx)，使用react-router-dom的Link組件，to屬性指定為第二點的path
 ```
 import { Link } from 'react-router-dom';
-<Link className="page-link" to="/home">Home</Link>
+<Link className="page-link" to="/todo">Todo</Link>
+// 編譯後結果 <a class="page-link" href="#/todo">Todo</a>
 ```
 
 ---
 ## Component
-存放除了views以外的組件，相同類型或目的的組件可建置子資料夾方便管理。開發組件時，請盡量使每個組件目的單純化，保持每個檔案不超過300行程式碼為標準。
-請參考```src/components/TodoListSet.tsx```
+參考檔案：```src/components/TodoListSet.tsx```
+存放除了views以外的組件，相同類型或目的的組件可建置子資料夾方便管理。
+1. 請盡量使每個組件目的單純化，保持每個檔案不超過300行程式碼為標準。
+2. 組件若非特殊狀況(如ErrorBoundary)，否則請盡量使用React的**functional component**及**hooks**實作。
+3. 在組件中盡量不使用render function的方式產生子組件，否則網站效能會受到影響。
+>組件效能優化可適當使用React提供的memo, useMemo, useCallback
 
 ---
 ## i18n
 多國語系以[i18next](https://react.i18next.com/)實作
+
+### 初始化
+請參考```src/hooks/useI18n.ts```
+
+### 預設語系
+可於```src/config/locale.config.ts```修改。
 
 ### 新增語系
 目前實作繁中與英文，若要新增其他語系，請依照步驟
@@ -95,8 +131,11 @@ const en_US: LocaleType = {
     ...補充文字
 }
 ```
+
 ### 新增翻譯內容
-先修改```src/i18n/locale```底下的localeType.ts，再修改同資料夾底下其他檔案
+1. 在```src/i18n/locale/localeType.ts```內的物件新增字串屬性。
+2. 修改```src/i18n/locale```資料夾底下其他檔案，依照1的定義調整內容。
+
 ### 使用翻譯文字
 利用react-i18next提供的hooks，取得並使用翻譯method t，參數即為localeType.ts內定義的物件路徑
 ```
@@ -108,6 +147,7 @@ const DemoComponent = () => {
     )
 }
 ```
+例外：無法使用hooks的場合，可參考```src/views/ErrorBoundary.tsx```
 ### 切換語系
 請參考```/sr/components/LocaleSelector.tsx```
 
@@ -156,31 +196,27 @@ $theme-colors: (
 
 ---
 ## Style
-以sass實作，並引入bootstrap。
+以sass實作，在```src/assets/scss/App.scss```引入bootstrap style。
+本專案已安裝套件[React-Bootstrap](https://react-bootstrap.github.io/components/alerts/)，可自行選擇使用組件。
 
-scss檔案存放於```src/assets/scss```底下，依照使用範圍存放於各子資料夾(views: 頁面, components: 組件, shared: 全域共用)。其中shared內的scss由```src/assets/scss/shared.scss```統一引入，其他scss要使用shared內容時只需引入此檔案即可。
+scss檔案存放於```src/assets/scss```底下，依照使用範圍存放於各子資料夾
+- views：頁面獨有scss。
+- components：組件獨有scss。
+- shared：scss共用的mixin，記載重複性高的css配置。
+- global：全網站共用className。
 
-若遇重複性高的css配置，請盡量使用sass提供的mixin功能，可參考```src/assets/scss/shared/mixin.scss```。
-
-### 判斷度量單位是否需隨螢幕大小變化
-為使不同螢幕大小有相近的顯示效果，使用css調整度量屬性時先判斷是否需依螢幕大小而變，若為是則盡量以rem實作，減少使用px這種固定值。
-rem的基礎值由```src/lib/rem.js```實作。
-
-### 建立scss
-每一個組件或頁面的tsx搭配一個同名scss檔，注意每個class的上下階層關係
+shared內的scss由```src/assets/scss/shared.scss```統一引入，其他scss要使用shared內容時只需引入此檔案即可。
 ```
+@import '../shared.scss';
 .header-navigator {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-
-    .page-link {
-        padding: 0 0.05rem;
-    }
+    @include flex-row(()); // 使用shared內提供的mixin
 }
-
 ```
+
+### 判斷度量單位是否需隨螢幕大小變化
+為使不同螢幕大小有相近的顯示效果，使用css調整度量屬性時先判斷是否需依螢幕大小而變，若為是則盡量以rem實作，減少使用px這種固定值。
+rem的基礎值由```src/lib/rem.js```實作，會在html根節點設置font-style，以作為rem的參考值。
+
 ### 將scss使用至頁面或組件
 ```
 import '~/assets/scss/components/HeaderNavigator.scss';
@@ -239,9 +275,21 @@ scss內引用shared.scss後，使用anim mixin method
 1. ```src/store/sagas/index.ts```內必須export
 2. ```src/store/rootSaga.ts```內引用該saga
 
+### 範例登入驗證機制
+參考檔案：```src/store/ducks/auth.duck.ts```與```src/store/sagas/auth.saga.ts```
+1. 每次進入網站或重新整理頁面，觸發auth action的checkLogin方法。
+2. 承1，若未登入，則auth state的authData保持undefined直到登入成功。
+3. 輸入帳密送出，應觸發auth action的tryLogin方法，將帳密送給後端api驗證。
+4. 承3，驗證成功後，觸發auth action的login方法執行下列事項，router將自動刷新。
+    - 改變api的驗證資訊
+    - 本地儲存驗證資料
+    - 改變auth state的authData
+5. 未登出狀態重新進入網站或重新整理，一樣觸發auth action的checkLogin方法，確認有驗證資料後直接觸發auth action的refresh token方法。
+6. 依照更新token結果，決定使用新舊token，並進入4。
+
 ---
 ## Api
-本專案使用axios，```src/lib/api.ts```統一管理實體與定義路徑
+本專案使用套件[axios](https://www.npmjs.com/package/axios)呼叫api，由```src/lib/api.ts```統一管理實體與定義路徑
 ### 定義Api
 於```src/lib/api.ts```內，將同一類型或後端url相同分類的api集中在同一物件中，並於export的api物件中定義
 ```
@@ -254,22 +302,26 @@ export const api = {
 }
 ```
 ### 呼叫Api
-1. redux-saga
+1. 在redux-saga內呼叫
 使用時機：api的返回內容將影響到redux state
 使用方式：搭配redux預先定義好的action使用，在xx.saga.ts內以redux-saga/effects提供的方法呼叫
 ```
 import { takeEvery, put, call, all } from 'redux-saga/effects';
-function* login(action: LoginAction) {
-    const res = yield call(api.auth.login, action.data);
-    if (res.state === 200) { // 判斷方式依實際api為準
-        // 登入成功
+import { AuthActionCreators, SystemActionCreators, AuthTryLoginAction } from '../ducks';
+/** 驗證帳密嘗試登入 */
+function* tryLogin(action: AuthLoginAction) {
+    yield put(SystemActionCreators.addLoadingFlag(action.type));
+    const res = yield call(api.auth.tryLogin, action.data); // 呼叫api並等待結果
+    if (res?.data?.code === "00") {
+        yield put(AuthActionCreators.login(res.data.data));
     } else {
-        // 登入失敗
+        // 顯示錯誤訊息
     }
+    yield put(SystemActionCreators.removeLoadingFlag(action.type));
 }
 export function* TodoSaga() {
     yield all([
-        takeEvery(AuthActionTypes.LOGIN, login),
+        takeEvery(AuthActionTypes.TRY_LOGIN, tryLogin),
     ])
 }
 ```

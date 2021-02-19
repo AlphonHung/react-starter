@@ -1,7 +1,7 @@
 import { takeEvery, put, call, all } from 'redux-saga/effects';
 import api from '~/lib/api';
 import { IAuthData } from '~/domain';
-import { AuthRegisterAction, AuthActionTypes, AuthActionCreators, SystemActionCreators, AuthLoginAction, AuthRefreshTokenAction, AuthPatchUserProfileAction, AuthCheckLoginAction, AuthGetUserProfileAction, AuthFakeLoginAction, AuthLogoutAction } from '../ducks';
+import { AuthRegisterAction, AuthActionTypes, AuthActionCreators, SystemActionCreators, AuthLoginAction, AuthTryLoginAction,  AuthRefreshTokenAction, AuthPatchUserProfileAction, AuthCheckLoginAction, AuthGetUserProfileAction, AuthFakeLoginAction, AuthLogoutAction } from '../ducks';
 import { StorageKeys } from '~/constants';
 
 /** 檢查本地原先是否有驗證資料 */
@@ -43,7 +43,7 @@ function* register(action: AuthRegisterAction) {
 }
 
 /** 驗證帳密嘗試登入 */
-function* tryLogin(action: AuthLoginAction) {
+function* tryLogin(action: AuthTryLoginAction) {
     yield put(SystemActionCreators.addLoadingFlag(action.type));
     // 待未來實作
     // const res = yield call(api.auth.tryLogin, action.data);
