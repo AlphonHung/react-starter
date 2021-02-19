@@ -1,10 +1,5 @@
-.header-navigator {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
+@import '../shared.scss';
 
-    .page-link {
-        padding: 0 0.05rem;
-    }
+.header-navigator {
+    @include flex-row(());
 }
