@@ -1,3 +1,6 @@
+
+![npm version](https://d25lcipzij17d.cloudfront.net/badge.svg?id=js&type=6&v=12.14.1&x2=0)
+
 # TCG React Starter
 專案用途：以react hooks、typescript環境，整合常用套件與配置，快速開發react web app。
 前置知識：[React Function Component](https://zh-hant.reactjs.org/docs/components-and-props.html)、[React Hooks](https://zh-hant.reactjs.org/docs/hooks-intro.html)。
