@@ -1,0 +1,7 @@
+@import '../shared';
+
+.home {
+    padding: 0.1rem;
+    @include anim(( name: example, duration: 1s, iteration-count: infinite, direction: alternate ));
+    @include flex-column((justify-content: flex-start));
+}

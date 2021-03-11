@@ -1,0 +1,6 @@
+@import '../shared';
+
+.login {
+    height: 100%;
+    @include flex-column(());
+}

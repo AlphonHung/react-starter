@@ -1,0 +1,11 @@
+@import "./variable.scss"; // 變數(顏色、圖片)
+@import "./global.scss"; // 全域共用css
+@import "~bootstrap/scss/bootstrap"; // 引入bootstrap
+
+body {
+    background-color: map-get($colors, view-bg); // 從變數$colors中取出view-bg的值
+
+    #app {
+        height: 100vh;
+    }
+}

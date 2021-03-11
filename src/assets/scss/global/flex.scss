@@ -1,0 +1,34 @@
+// 給tsx使用的className
+.flex-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.flex-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.flex-justify-start {
+    justify-content: flex-start;
+}
+.flex-justify-end {
+    justify-content: flex-end;
+}
+.flex-justify-spbt {
+    justify-content: space-between;
+}
+.flex-justify-spar {
+    justify-content: space-around;
+}
+.flex-align-start {
+    align-items: flex-start;
+}
+.flex-align-end {
+    align-items: flex-end;
+}
+.flex-wrap {
+    flex-wrap: wrap;
+}

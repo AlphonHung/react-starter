@@ -1,0 +1,3 @@
+/** 這裡匯入全域共享的css，使用時只需在App.tsx匯入一次 */
+@import './global/reset.scss';
+@import './global/flex.scss';

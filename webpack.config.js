@@ -8,7 +8,8 @@ module.exports = {
     },
     output: {
         path: path.resolve(__dirname, './dist/'),
-        filename: 'bundle.js',
+        filename: 'js/[name].[chunkhash].js',
+        chunkFilename: 'js/[name].[chunkhash].js'
     },
     module: {
         rules: [
@@ -46,6 +47,31 @@ module.exports = {
                     { loader: 'css-loader' },
                     { loader: 'sass-loader' }
                 ]
+            },
+            { // for image
+                test: /\.(png|jpe?g|gif)$/i,
+                loader: 'url-loader', // url-loader可將資源轉為base64格式，提高效能(但增加bundle.js size)
+                options: {
+                    name: 'assets/img/[name].[chunkhash].[ext]',
+                    limit: 8192, // 單位bytes, 限制可轉為base64資源的大小, 超過大小改使用file-loader
+                    esModule: false
+                }
+            },
+            { // for media
+                test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/,
+                loader: 'url-loader',
+                options: {
+                    name: 'assets/media/[name].[chunkhash].[ext]',
+                    limit: 8192,
+                }
+            },
+            { // for font style
+                test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
+                loader: 'url-loader',
+                options: {
+                    name: 'assets/fonts/[name].[chunkhash].[ext]',
+                    limit: 8192,
+                }
             }
         ]
     },
@@ -56,7 +82,7 @@ module.exports = {
     plugins: [
         // 用來產生dist/index.html
         new HtmlWebpackPlugin({
-            template: `${__dirname}/src/index.html`,
+            template: `${__dirname}/src/assets/index.html`,
             filename: 'index.html',
             inject: 'body', // 把output的js引用到產生的html body內
         })
